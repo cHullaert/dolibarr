@@ -22,7 +22,7 @@ RUN cd /tmp \
 RUN mkdir /var/www/html/documents \
     && chown -hR www-data:www-data /var/www/html
 
-COPY php.ini /usr/local/etc/php
+COPY ./php.ini /usr/local/etc/php
 
 VOLUME ["/var/www/html/conf", "/var/www/html/documents"]
 

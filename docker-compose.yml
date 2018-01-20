@@ -21,7 +21,4 @@ services:
         links: 
             - mysql
         volumes:
-            - dolibarr-data:/var/www/html
-volumes:
-  dolibarr-data:
-    driver: local
+            - ./html:/var/www/html
