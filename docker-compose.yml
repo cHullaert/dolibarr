@@ -24,4 +24,4 @@ services:
             - dolibarr-data:/var/www/html
 volumes:
   dolibarr-data:
-driver: local
+    driver: local
