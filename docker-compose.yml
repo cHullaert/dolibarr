@@ -1,24 +1,33 @@
-version: '3'
+version: "3"
 services:
-    mysql:
-        image: mysql:5.5
-        ports:
-            - "3306:3306"
-        environment:
-            - MYSQL_ROOT_PASSWORD=root     
-            - MYSQL_USER=dolibarr
-            - MYSQL_PASSWORD=pedro489__
-            - MYSQL_DATABASE=dolibarr
-        volumes:
-            - ./data/db/mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+  mysql:
+    image: mysql:5.5
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=dolibarr
+      - MYSQL_PASSWORD=pedro489__
+      - MYSQL_DATABASE=dolibarr
+    volumes:
+      - ./data/db/mysql:/var/lib/mysql
 
-    dolibarr:
-        image: dolibarr-darwin
-        ports:
-            - "1234:80"
-        depends_on:
-            - mysql
-        links: 
-            - mysql
-        volumes:
-            - ./html:/var/www/html
+  dolibarr:
+    image: dolibarr-darwin
+    ports:
+      - "1234:80"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - ./html:/var/www/html
